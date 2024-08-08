@@ -2,12 +2,15 @@
 pragma solidity ^0.8.0;
 
 contract Factory {
-    mapping(string => address) public gameContracts;
     address private owner;
+    mapping(string => address) public gameContracts;
+    address[] public deployedGames;
 
     constructor() {
         owner = msg.sender;
     }
+
+    receive() external payable {}
 
     function createGameContract(
         string calldata _gameName,
@@ -17,12 +20,11 @@ contract Factory {
         require(gameContracts[_gameName] == address(0), "Game already exists");
         Game game = new Game(_team1, _team2, owner);
         gameContracts[_gameName] = address(game);
+        deployedGames.push(address(game));
     }
 
-    function getGameContract(
-        string memory _gameName
-    ) public view returns (address) {
-        return gameContracts[_gameName];
+    function getDeployedGames() public view returns (address[] memory) {
+        return deployedGames;
     }
 
     modifier onlyOwner() {
@@ -35,6 +37,8 @@ contract Game {
     address public owner;
     string public team1;
     string public team2;
+    uint public team1Pool;
+    uint public team2Pool;
     bool private lock;
     bool public gameEnded;
 
@@ -61,34 +65,36 @@ contract Game {
         }
     }
 
+    function getBalances() public view returns (address[] memory) {
+        return betters;
+    }
+
     function endGame(string calldata winningTeam) public onlyOwner {
         require(lock, "Betting is still open");
         // We don't want to pay out multiple times by calling this function
         require(!gameEnded, "Game already ended once");
 
-        uint winnersAmount = 0;
-        uint losersAmount = 0;
-
-        // Calculate total winners pool and losers pool
-        for (uint256 i = 0; i < betters.length; i++) {
-            Wager storage wager = balances[betters[i]]; // *** CHECK IF THIS IS PASS BY REFERNCE ***
-
-            if (
-                keccak256(abi.encodePacked(wager.team)) ==
-                keccak256(abi.encodePacked(winningTeam))
-            ) {
-                wager.winner = true;
-                winnersAmount += wager.amount;
-            } else {
-                losersAmount += wager.amount;
-            }
+        uint winnersAmount;
+        uint losersAmount;
+        if (
+            keccak256(abi.encodePacked(winningTeam)) ==
+            keccak256(abi.encodePacked(team1))
+        ) {
+            winnersAmount = team1Pool;
+            losersAmount = team2Pool;
+        } else {
+            winnersAmount = team2Pool;
+            losersAmount = team1Pool;
         }
 
         // Pay out winners
         for (uint256 i = 0; i < betters.length; i++) {
             address better = betters[i];
             Wager storage wager = balances[better];
-            if (wager.winner) {
+            if (
+                keccak256(abi.encodePacked(wager.team)) ==
+                keccak256(abi.encodePacked(winningTeam))
+            ) {
                 uint payout = wager.amount +
                     ((wager.amount * losersAmount) / winnersAmount);
                 payable(better).transfer(payout);
@@ -107,14 +113,31 @@ contract Game {
                 keccak256(abi.encodePacked(team2)),
             "Invalid team name"
         );
-
-        // Add to betters array only if new better
-        if (balances[msg.sender].amount == 0) {
+        if (balances[msg.sender].amount > 0) {
+            require(
+                keccak256(abi.encodePacked(balances[msg.sender].team)) ==
+                    keccak256(abi.encodePacked(teamName)),
+                "Cannot bet on a different team"
+            );
+        } else {
+            // Add to betters array only if new better
             betters.push(msg.sender);
         }
 
         balances[msg.sender].amount += msg.value;
         balances[msg.sender].team = teamName;
+
+        if (
+            keccak256(abi.encodePacked(teamName)) ==
+            keccak256(abi.encodePacked(team1))
+        ) {
+            team1Pool += msg.value;
+        } else if (
+            keccak256(abi.encodePacked(teamName)) ==
+            keccak256(abi.encodePacked(team2))
+        ) {
+            team2Pool += msg.value;
+        }
 
         // Emit event for handling
         emit Deposit(msg.sender, msg.value);
