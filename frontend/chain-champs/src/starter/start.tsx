@@ -47,7 +47,7 @@ async function main() {
         // const deployedGames = await contract.getDeployedGames();
         // console.log('Deployed game contracts:', deployedGames);
     } catch (error) {
-        console.error('Error calling contract:', error);
+        console.error('Error calling contract');
     }
 }
 

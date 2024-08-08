@@ -9,7 +9,8 @@ import gameData from '../../../data/games.json'
 
 
 // Replace with your contract's address and Ethereum provider URL
-const factoryAddress = '0x558287f3493A0db5a0Bf34CF1BffF4799001703B';
+// const factoryAddress = '0x558287f3493A0db5a0Bf34CF1BffF4799001703B';
+const factoryAddress = '0x3bA32a9b334709AF5b6322A13fa07602312DfECE'
 const providerURL = 'https://base-sepolia.g.alchemy.com/v2/6w0m6Qq8BgDakS7i5wyRoFGIktElM1Iy';
 
 const provider = new ethers.providers.JsonRpcProvider(providerURL); // Replace with your provider URL
@@ -50,6 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const games = await Promise.all(gameAddresses.map(async (address: string) => {
             const details = await getGameDetails(address);
             return {
+                gameAddress: details.gameAddress,
                 name: `${details.team1} vs ${details.team2}`,
                 team1: details.team1,
                 team2: details.team2,
@@ -63,7 +65,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         res.status(200).json(games);
     } catch (error) {
-        console.error(error);
+        console.error('Error fetching game contracts');
         res.status(500).send('Error fetching game contracts');
     }
 }
