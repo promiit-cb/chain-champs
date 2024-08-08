@@ -1,0 +1,107 @@
+[
+    {
+        "name": "Los Angeles Lakers vs Golden State Warriors",
+        "team1": "Los Angeles Lakers",
+        "team2": "Golden State Warriors",
+        "start_time": "2024-08-07 18:00:00",
+        "end_time": "2024-08-07 20:00:00"
+    },
+    {
+        "name": "Brooklyn Nets vs Milwaukee Bucks",
+        "team1": "Brooklyn Nets",
+        "team2": "Milwaukee Bucks",
+        "start_time": "2024-08-07 19:00:00",
+        "end_time": "2024-08-07 21:00:00"
+    },
+    {
+        "name": "Chicago Bulls vs Boston Celtics",
+        "team1": "Chicago Bulls",
+        "team2": "Boston Celtics",
+        "start_time": "2024-08-07 20:00:00",
+        "end_time": "2024-08-07 22:00:00"
+    },
+    {
+        "name": "Miami Heat vs Philadelphia 76ers",
+        "team1": "Miami Heat",
+        "team2": "Philadelphia 76ers",
+        "start_time": "2024-08-07 20:30:00",
+        "end_time": "2024-08-07 22:30:00"
+    },
+    {
+        "name": "Houston Rockets vs Dallas Mavericks",
+        "team1": "Houston Rockets",
+        "team2": "Dallas Mavericks",
+        "start_time": "2024-08-07 21:00:00",
+        "end_time": "2024-08-07 23:00:00"
+    },
+    {
+        "name": "New York Knicks vs Toronto Raptors",
+        "team1": "New York Knicks",
+        "team2": "Toronto Raptors",
+        "start_time": "2024-08-08 18:00:00",
+        "end_time": "2024-08-08 20:00:00"
+    },
+    {
+        "name": "San Antonio Spurs vs Denver Nuggets",
+        "team1": "San Antonio Spurs",
+        "team2": "Denver Nuggets",
+        "start_time": "2024-08-08 19:00:00",
+        "end_time": "2024-08-08 21:00:00"
+    },
+    {
+        "name": "Utah Jazz vs Phoenix Suns",
+        "team1": "Utah Jazz",
+        "team2": "Phoenix Suns",
+        "start_time": "2024-08-08 20:00:00",
+        "end_time": "2024-08-08 22:00:00"
+    },
+    {
+        "name": "Orlando Magic vs Atlanta Hawks",
+        "team1": "Orlando Magic",
+        "team2": "Atlanta Hawks",
+        "start_time": "2024-08-08 20:30:00",
+        "end_time": "2024-08-08 22:30:00"
+    },
+    {
+        "name": "Portland Trail Blazers vs Oklahoma City Thunder",
+        "team1": "Portland Trail Blazers",
+        "team2": "Oklahoma City Thunder",
+        "start_time": "2024-07-08 21:00:00",
+        "end_time": "2024-07-08 23:00:00"
+    },
+    {
+        "name": "Minnesota Timberwolves vs Memphis Grizzlies",
+        "team1": "Minnesota Timberwolves",
+        "team2": "Memphis Grizzlies",
+        "start_time": "2024-08-09 18:00:00",
+        "end_time": "2024-08-09 20:00:00"
+    },
+    {
+        "name": "New Orleans Pelicans vs Sacramento Kings",
+        "team1": "New Orleans Pelicans",
+        "team2": "Sacramento Kings",
+        "start_time": "2024-08-09 19:00:00",
+        "end_time": "2024-08-09 21:00:00"
+    },
+    {
+        "name": "Charlotte Hornets vs Indiana Pacers",
+        "team1": "Charlotte Hornets",
+        "team2": "Indiana Pacers",
+        "start_time": "2024-08-09 20:00:00",
+        "end_time": "2024-08-09 22:00:00"
+    },
+    {
+        "name": "Cleveland Cavaliers vs Detroit Pistons",
+        "team1": "Cleveland Cavaliers",
+        "team2": "Detroit Pistons",
+        "start_time": "2024-08-09 20:30:00",
+        "end_time": "2024-08-09 22:30:00"
+    },
+    {
+        "name": "Washington Wizards vs Los Angeles Clippers",
+        "team1": "Washington Wizards",
+        "team2": "Los Angeles Clippers",
+        "start_time": "2024-08-09 21:00:00",
+        "end_time": "2024-08-09 23:00:00"
+    }
+]
